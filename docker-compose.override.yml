@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+    classificationdb:
+        container_name: classificationdb
+        restart: always
+        ports:
+            - "27017:27017"
+        volumes:
+            - mongo_data:/data/db
+
+    category.api:
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - "DatabaseSettings:ConnectionString=mongodb://ClassificationDB:27017"
+        depends_on:
+            - classificationdb
+        ports:
+            - "8000:80"
+

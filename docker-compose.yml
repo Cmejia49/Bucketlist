@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+    classificationdb:
+        image: mongo
+
+    category.api:
+        image: ${DOCKER_REGISTRY-}categoryapi
+        build:
+            context: .
+            dockerfile: Category.API/Dockerfile
+
+volumes:
+   mongo_data:
